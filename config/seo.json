@@ -1,0 +1,12 @@
+{
+  "title": "Home",
+  "titleTemplate": "%s | Design 2 MA1",
+  "defaultTitle": "Design 2 MA1",
+  "description": "The Design 2 Module Assignment 1.",
+  "openGraph": {
+    "type": "website",
+    "locale": "en",
+    "url": "https://noroff-design2-ma1.vercel.app",
+    "site_name": "Design 2 MA1"
+  }
+}

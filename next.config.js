@@ -6,10 +6,6 @@ const securityHeaders = [
     value: 'on',
   },
   {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
-  },
-  {
     key: 'Server',
     value: 'Apache',
   },
@@ -19,7 +15,7 @@ const securityHeaders = [
   },
   {
     key: 'X-Frame-Options',
-    value: 'sameorigin',
+    value: 'SAMEORIGIN',
   },
   {
     key: 'X-XSS-Protection',

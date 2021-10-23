@@ -62,7 +62,7 @@ const Navbar: FC = () => {
                 {/* Left nav */}
                 <div className='lg:flex-1 lg:flex lg:items-center'>
                   <Link href='/'>
-                    <a className='flex items-center gap-x-2'>
+                    <a className='flex items-center transition-opacity duration-200 ease-in-out gap-x-2 hover:opacity-40'>
                       <Logo className='w-6 h-6 text-black' />
                       <span className='text-sm font-semibold text-black'>
                         {navigation.title}
@@ -77,7 +77,7 @@ const Navbar: FC = () => {
                     <a
                       key={page.name}
                       href={page.href}
-                      className='flex items-center text-sm font-semibold text-black'
+                      className='flex items-center text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40'
                     >
                       {page.name}
                     </a>
@@ -88,13 +88,13 @@ const Navbar: FC = () => {
                 <div className='flex justify-end flex-1'>
                   <div className='flex items-center space-x-8'>
                     <Link href='#'>
-                      <a className='hidden text-sm font-semibold text-black lg:block'>
+                      <a className='hidden text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40 lg:block'>
                         Sign in
                       </a>
                     </Link>
 
                     <Link href='#'>
-                      <a className='hidden text-sm font-semibold text-black lg:block'>
+                      <a className='hidden text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40 lg:block'>
                         Create an account
                       </a>
                     </Link>

@@ -207,10 +207,14 @@ const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <Link href='/explore' scroll={false}>
-              <a className='inline-block px-8 py-3 mt-8 text-base font-semibold text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50'>
+            <Link href='/' passHref={true} scroll={false}>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className='inline-block px-8 py-3 mt-8 text-base font-semibold text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50'
+              >
                 Explore
-              </a>
+              </motion.a>
             </Link>
           </motion.div>
         </div>
@@ -231,12 +235,13 @@ const Home = () => {
               >
                 Decorations
               </h2>
-              <a
-                href='#'
-                className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
-              >
-                Shop the collection<span aria-hidden='true'> &rarr;</span>
-              </a>
+
+              <Link href='/' passHref={true} scroll={false}>
+                <a className='hidden space-x-1 text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-400 hover:from-teal-200 hover:to-cyan-300 md:inline-flex'>
+                  <span>Shop the collection</span>
+                  <span aria-hidden='true'>&rarr;</span>
+                </a>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -249,12 +254,12 @@ const Home = () => {
             </motion.div>
 
             <div className='mt-8 text-sm md:hidden'>
-              <a
-                href='#'
-                className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
-              >
-                Shop the collection<span aria-hidden='true'> &rarr;</span>
-              </a>
+              <Link href='/' passHref={true} scroll={false}>
+                <a className='inline-flex space-x-1 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-400 hover:from-teal-200 hover:to-cyan-300'>
+                  <span>Shop the collection</span>
+                  <span aria-hidden='true'> &rarr;</span>
+                </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -275,12 +280,12 @@ const Home = () => {
               >
                 Vases
               </h2>
-              <a
-                href='#'
-                className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
-              >
-                Shop the collection<span aria-hidden='true'> &rarr;</span>
-              </a>
+              <Link href='/' passHref={true} scroll={false}>
+                <a className='hidden space-x-1 text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-400 hover:from-teal-200 hover:to-cyan-300 md:inline-flex'>
+                  <span>Shop the collection</span>
+                  <span aria-hidden='true'> &rarr;</span>
+                </a>
+              </Link>
             </motion.div>
 
             <motion.div
@@ -293,12 +298,12 @@ const Home = () => {
             </motion.div>
 
             <div className='mt-8 text-sm md:hidden'>
-              <a
-                href='#'
-                className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
-              >
-                Shop the collection<span aria-hidden='true'> &rarr;</span>
-              </a>
+              <Link href='/' passHref={true} scroll={false}>
+                <a className='inline-flex space-x-1 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-400 hover:from-teal-200 hover:to-cyan-300'>
+                  <span>Shop the collection</span>
+                  <span aria-hidden='true'>&rarr;</span>
+                </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -322,12 +327,15 @@ const Home = () => {
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
                   laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
-                <a
-                  href='#'
-                  className='block w-full px-8 py-3 mt-8 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 sm:w-auto'
-                >
-                  Read more
-                </a>
+                <Link href='/' passHref={true} scroll={false}>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className='block w-full px-8 py-3 mt-8 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 sm:w-auto'
+                  >
+                    Read more
+                  </motion.a>
+                </Link>
               </div>
             </div>
           </div>
@@ -418,12 +426,14 @@ const Home = () => {
                       className='w-full px-5 py-3 text-black placeholder-gray-500 transition-colors duration-200 border-white rounded-md focus:outline-none focus:ring-0 focus:border-teal-200 focus:border-opacity-90'
                       placeholder='Enter your email'
                     />
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       type='submit'
                       className='flex items-center justify-center w-full px-5 py-3 mt-3 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'
                     >
                       Notify me
-                    </button>
+                    </motion.button>
                   </form>
                   <p className='mt-3 text-sm text-black'>
                     We care about the protection of your data. Read our{' '}

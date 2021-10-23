@@ -361,7 +361,9 @@ const Home = () => {
                           aria-hidden='true'
                         />
                       </span>
-                      <div className='flex justify-center'>{incentive.svg}</div>
+                      <div className='flex justify-center'>
+                        {incentive.icon}
+                      </div>
                       <div className='mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0'>
                         <h3 className='text-sm font-medium text-gray-900'>
                           {incentive.name}

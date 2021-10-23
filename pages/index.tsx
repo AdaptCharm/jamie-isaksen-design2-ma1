@@ -1,6 +1,9 @@
 import { Layout } from '@components/common'
+import Link from 'next/link'
 import Image from 'next/image'
 import cn from 'classnames'
+import { motion } from 'framer-motion'
+import { FadeInWhenVisible } from '@components/motion'
 
 import {
   MenuIcon,
@@ -8,11 +11,14 @@ import {
   SearchIcon,
   ShoppingBagIcon,
   XIcon,
+  ShieldCheckIcon,
+  TruckIcon,
+  SparklesIcon,
 } from '@heroicons/react/outline'
 
 import { Logo } from '@components/icons'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 
 import { Element, Container, Text, Grid, Badge } from '@components/ui'
@@ -122,214 +128,314 @@ const trendingProducts = [
   },
 ]
 
+const incentives = [
+  {
+    name: 'Free shipping',
+    icon: TruckIcon,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+  },
+  {
+    name: '10-year warranty',
+    icon: ShieldCheckIcon,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+  },
+  {
+    name: '24/7 customer support',
+    icon: SparklesIcon,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+  },
+]
+
+let easing = [0.6, -0.05, 0.01, 0.99]
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+}
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
 const Home = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   return (
-    <>
+    <motion.div initial='initial' animate='animate' exit={{ opacity: 0 }}>
       {/* Hero section */}
-      <div className='relative'>
-        {/* Decorative image and overlay */}
-        <div aria-hidden='true' className='absolute inset-0 overflow-hidden'>
-          <Image
-            className='object-cover object-center w-full h-full'
-            placeholder='blur'
-            blurDataURL='/hero/hero-2.png'
-            src='/hero/hero-2.png'
-            alt='Hero image'
-            layout='fill'
-          />
+      <FadeInWhenVisible>
+        <div className='relative'>
+          {/* Decorative image and overlay */}
+          <div className='flex-shrink-0 overflow-hidden' aria-hidden='true'>
+            <Image
+              className='object-cover object-center w-full h-full'
+              placeholder='blur'
+              blurDataURL='/gradients/gradient-1.png'
+              src='/gradients/gradient-1.png'
+              alt='Gradient 1.'
+              layout='fill'
+            />
+          </div>
+
+          <motion.div
+            variants={fadeInUp}
+            className='relative flex flex-col items-center max-w-3xl px-6 py-32 mx-auto text-center sm:py-64 lg:px-0'
+          >
+            <h1 className='text-4xl font-extrabold tracking-tight lg:text-6xl'>
+              <span className='block text-black'>A better way to</span>
+              <span className='block text-white drop-shadow'>
+                shop home decor
+              </span>
+            </h1>
+            <p className='mt-6 text-xl text-black'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <Link href='/explore' scroll={false}>
+              <a className='inline-block px-8 py-3 mt-8 text-base font-semibold text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50'>
+                Explore
+              </a>
+            </Link>
+          </motion.div>
         </div>
+      </FadeInWhenVisible>
 
-        <header className='relative z-10'>
-          <nav aria-label='Top'>
-            {/* Secondary navigation */}
-            <div className='bg-white backdrop-blur backdrop-filter bg-opacity-10'>
-              <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-                <div>
-                  <div className='flex items-center justify-between h-16'>
-                    {/* Logo (lg+) */}
-                    <div className='hidden lg:flex-1 lg:flex lg:items-center'>
-                      <a href='#'>
-                        <span className='sr-only'>Design 2 MA1</span>
-                        <Logo className='w-auto h-8 text-white' />
-                      </a>
-                    </div>
+      {/* Decorations section */}
+      <FadeInWhenVisible>
+        <section aria-labelledby='trending-heading'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
+            <motion.div
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              className='md:flex md:items-center md:justify-between'
+            >
+              <h2
+                id='favorites-heading'
+                className='text-2xl font-extrabold tracking-tight text-gray-900'
+              >
+                Decorations
+              </h2>
+              <a
+                href='#'
+                className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
+              >
+                Shop the collection<span aria-hidden='true'> &rarr;</span>
+              </a>
+            </motion.div>
 
-                    <div className='hidden h-full lg:flex'>
-                      {/* Flyout menus */}
-                      <Popover.Group className='inset-x-0 bottom-0 px-4'>
-                        <div className='flex justify-center h-full space-x-8'>
-                          {navigation.pages.map((page) => (
-                            <a
-                              key={page.name}
-                              href={page.href}
-                              className='flex items-center text-sm font-semibold text-white'
-                            >
-                              {page.name}
-                            </a>
-                          ))}
-                        </div>
-                      </Popover.Group>
-                    </div>
+            <motion.div
+              variants={stagger}
+              className='grid grid-cols-2 mt-6 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'
+            >
+              {decorations.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))}
+            </motion.div>
 
-                    {/* Mobile menu and search (lg-) */}
-                    <div className='flex items-center flex-1 lg:hidden'>
-                      <button
-                        type='button'
-                        className='p-2 -ml-2 text-white'
-                        onClick={() => setMobileMenuOpen(true)}
-                      >
-                        <span className='sr-only'>Open menu</span>
-                        <MenuIcon className='w-6 h-6' aria-hidden='true' />
-                      </button>
+            <div className='mt-8 text-sm md:hidden'>
+              <a
+                href='#'
+                className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
+              >
+                Shop the collection<span aria-hidden='true'> &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </FadeInWhenVisible>
 
-                      {/* Search */}
-                      <a href='#' className='p-2 ml-2 text-white'>
-                        <span className='sr-only'>Search</span>
-                        <SearchIcon className='w-6 h-6' aria-hidden='true' />
-                      </a>
-                    </div>
+      {/* Vases section */}
+      <FadeInWhenVisible>
+        <section aria-labelledby='trending-heading'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
+            <motion.div
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              className='md:flex md:items-center md:justify-between'
+            >
+              <h2
+                id='favorites-heading'
+                className='text-2xl font-extrabold tracking-tight text-gray-900'
+              >
+                Vases
+              </h2>
+              <a
+                href='#'
+                className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
+              >
+                Shop the collection<span aria-hidden='true'> &rarr;</span>
+              </a>
+            </motion.div>
 
-                    {/* Logo (lg-) */}
-                    <a href='#' className='lg:hidden'>
-                      <span className='sr-only'>Design 2 MA1</span>
-                      <Logo className='w-auto h-8 text-white' />
-                    </a>
+            <motion.div
+              variants={stagger}
+              className='grid grid-cols-2 mt-6 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'
+            >
+              {trendingProducts.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))}
+            </motion.div>
 
-                    <div className='flex items-center justify-end flex-1'>
-                      <a
-                        href='#'
-                        className='hidden text-sm font-semibold text-white lg:block'
-                      >
-                        Sign in
-                      </a>
+            <div className='mt-8 text-sm md:hidden'>
+              <a
+                href='#'
+                className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
+              >
+                Shop the collection<span aria-hidden='true'> &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </FadeInWhenVisible>
 
-                      <div className='flex items-center lg:ml-8'>
-                        <a
-                          href='#'
-                          className='hidden text-sm font-semibold text-white lg:block'
-                        >
-                          Create an account
-                        </a>
+      {/* Featured section */}
+      <FadeInWhenVisible>
+        <section aria-labelledby='comfort-heading' className=''>
+          <div className='relative bg-gradient-to-r from-teal-200 to-cyan-400'>
+            <div className='relative px-6 py-32 sm:py-40 sm:px-12 lg:px-16'>
+              <div className='relative flex flex-col items-center max-w-3xl mx-auto text-center'>
+                <h2
+                  id='comfort-heading'
+                  className='text-3xl font-extrabold tracking-tight text-black sm:text-4xl'
+                >
+                  100% Customer Satisfaction
+                </h2>
+                <p className='mt-3 text-xl text-black'>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <a
+                  href='#'
+                  className='block w-full px-8 py-3 mt-8 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 sm:w-auto'
+                >
+                  Read more
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </FadeInWhenVisible>
 
-                        {/* Cart */}
-                        <div className='flow-root ml-4 lg:ml-8'>
-                          <a
-                            href='#'
-                            className='flex items-center p-2 -m-2 group'
-                          >
-                            <ShoppingBagIcon
-                              className='flex-shrink-0 w-6 h-6 text-white'
-                              aria-hidden='true'
-                            />
-                            <span className='ml-2 text-sm font-semibold text-white'>
-                              0
-                            </span>
-                            <span className='sr-only'>
-                              items in cart, view bag
-                            </span>
-                          </a>
-                        </div>
+      {/* Features section */}
+      <FadeInWhenVisible>
+        <div className='bg-white'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+            <div className='px-6 py-16 bg-gray-50 rounded-2xl sm:p-16'>
+              <div className='max-w-xl mx-auto lg:max-w-none'>
+                <div className='text-center'>
+                  <h2 className='text-2xl font-extrabold tracking-tight text-gray-900'>
+                    We built our business on customer service
+                  </h2>
+                </div>
+                <motion.div
+                  variants={stagger}
+                  className='grid max-w-sm grid-cols-1 mx-auto mt-12 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3'
+                >
+                  {incentives.map((incentive) => (
+                    <motion.div
+                      variants={fadeInUp}
+                      key={incentive.name}
+                      className='text-center sm:flex sm:text-left lg:block lg:text-center'
+                    >
+                      <span className='inline-flex items-center justify-center p-3 rounded-md shadow-lg bg-gradient-to-r from-teal-200 to-cyan-400'>
+                        <incentive.icon
+                          className='w-6 h-6 text-black'
+                          aria-hidden='true'
+                        />
+                      </span>
+                      <div className='flex justify-center'>{incentive.svg}</div>
+                      <div className='mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0'>
+                        <h3 className='text-sm font-medium text-gray-900'>
+                          {incentive.name}
+                        </h3>
+                        <p className='mt-2 text-sm text-gray-500'>
+                          {incentive.description}
+                        </p>
                       </div>
-                    </div>
-                  </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </FadeInWhenVisible>
+
+      {/* Newsletter section */}
+      <FadeInWhenVisible>
+        <div className='bg-white'>
+          <div className='px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8'>
+            <div className='relative px-6 py-10 overflow-hidden rounded-3xl sm:py-16 sm:px-12 lg:p-20'>
+              <div className='flex-shrink-0'>
+                <Image
+                  className='object-cover object-center w-full h-full'
+                  placeholder='blur'
+                  blurDataURL='/gradients/gradient-2.png'
+                  src='/gradients/gradient-2.png'
+                  alt='Gradient 2.'
+                  layout='fill'
+                />
+              </div>
+              <div className='relative lg:flex lg:items-center'>
+                <div className='lg:w-0 lg:flex-1'>
+                  <h2 className='text-3xl font-extrabold tracking-tight text-black'>
+                    Sign up for our newsletter
+                  </h2>
+                  <p className='max-w-3xl mt-4 text-lg text-black'>
+                    Anim aute id magna aliqua ad fugiat.
+                  </p>
+                </div>
+                <div className='mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1'>
+                  <form className='sm:flex'>
+                    <label htmlFor='email-address' className='sr-only'>
+                      Email address
+                    </label>
+                    <input
+                      name='email-address'
+                      type='email'
+                      autoComplete='new-email'
+                      required
+                      className='w-full px-5 py-3 text-black placeholder-gray-500 transition-colors duration-200 border-white rounded-md focus:outline-none focus:ring-0 focus:border-teal-200 focus:border-opacity-90'
+                      placeholder='Enter your email'
+                    />
+                    <button
+                      type='submit'
+                      className='flex items-center justify-center w-full px-5 py-3 mt-3 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0'
+                    >
+                      Notify me
+                    </button>
+                  </form>
+                  <p className='mt-3 text-sm text-black'>
+                    We care about the protection of your data. Read our{' '}
+                    <a href='#' className='font-medium text-black underline'>
+                      Privacy Policy.
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
-          </nav>
-        </header>
-
-        <div className='relative flex flex-col items-center max-w-3xl px-6 py-32 mx-auto text-center sm:py-64 lg:px-0'>
-          <h1 className='text-4xl font-extrabold tracking-tight text-white xl:text-6xl'>
-            <span className='block pb-4'>A new way to</span>
-            <span className='block pb-3 text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5 filter drop-shadow-xl backdrop-filter backdrop-blur-3xl'>
-              shop home decors
-            </span>
-          </h1>
-          <p className='mt-4 text-xl text-white'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <a
-            href='#'
-            className='inline-block px-8 py-3 mt-8 text-base font-semibold text-white bg-white border border-transparent rounded-md bg-opacity-20 hover:bg-opacity-30'
-          >
-            Explore
-          </a>
-        </div>
-      </div>
-
-      {/* Decorations section */}
-      <section aria-labelledby='trending-heading'>
-        <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
-          <div className='md:flex md:items-center md:justify-between'>
-            <h2
-              id='favorites-heading'
-              className='text-2xl font-extrabold tracking-tight text-gray-900'
-            >
-              Decorations
-            </h2>
-            <a
-              href='#'
-              className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
-            >
-              Shop the collection<span aria-hidden='true'> &rarr;</span>
-            </a>
-          </div>
-
-          <div className='grid grid-cols-2 mt-6 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'>
-            {decorations.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
-          </div>
-
-          <div className='mt-8 text-sm md:hidden'>
-            <a
-              href='#'
-              className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
-            >
-              Shop the collection<span aria-hidden='true'> &rarr;</span>
-            </a>
           </div>
         </div>
-      </section>
-
-      {/* Vases section */}
-      <section aria-labelledby='trending-heading'>
-        <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
-          <div className='md:flex md:items-center md:justify-between'>
-            <h2
-              id='favorites-heading'
-              className='text-2xl font-extrabold tracking-tight text-gray-900'
-            >
-              Vases
-            </h2>
-            <a
-              href='#'
-              className='hidden text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400 md:block'
-            >
-              Shop the collection<span aria-hidden='true'> &rarr;</span>
-            </a>
-          </div>
-
-          <div className='grid grid-cols-2 mt-6 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8'>
-            {trendingProducts.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
-          </div>
-
-          <div className='mt-8 text-sm md:hidden'>
-            <a
-              href='#'
-              className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-cyan-400'
-            >
-              Shop the collection<span aria-hidden='true'> &rarr;</span>
-            </a>
-          </div>
-        </div>
-      </section>
-    </>
+      </FadeInWhenVisible>
+    </motion.div>
   )
 }
 

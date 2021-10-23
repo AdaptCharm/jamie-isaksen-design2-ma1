@@ -4,7 +4,7 @@ import { Navbar } from '@components/common'
 const Layout: FC = ({ children }) => {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <main>{children}</main>
     </>
   )

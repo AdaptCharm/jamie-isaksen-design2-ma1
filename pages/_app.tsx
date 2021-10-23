@@ -2,6 +2,7 @@ import '@assets/main.css'
 
 import { FC, useEffect } from 'react'
 import type { AppProps } from 'next/app'
+import { AnimatePresence } from 'framer-motion'
 
 import { Head } from '@components/common'
 
@@ -18,7 +19,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <Head />
       <Layout pageProps={pageProps}>
-        <Component {...pageProps} />
+        <AnimatePresence
+          exitBeforeEnter
+          // initial={false}
+          // onExitComplete={() => window.scrollTo(0, 0)}
+        >
+          <Component {...pageProps} />
+        </AnimatePresence>
       </Layout>
     </>
   )

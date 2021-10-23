@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import cn from 'classnames'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 import { Text } from '@components/ui'
 import { X } from '@components/icons'
@@ -22,10 +23,38 @@ interface Product {
   }
 }
 
+let easing = [0.6, -0.05, 0.01, 0.99]
+
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+}
+
 const ProductCard: FC<Props> = ({ className, product }) => {
   return (
-    <div className='relative group'>
-      <div className='relative w-full h-56 overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80'>
+    <motion.div
+      variants={fadeInUp}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className='relative group'
+    >
+      <motion.div
+        initial={{ x: 60, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className='relative w-full h-56 overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80'
+      >
         <Image
           className='object-cover object-center w-full h-full'
           placeholder='blur'
@@ -34,7 +63,7 @@ const ProductCard: FC<Props> = ({ className, product }) => {
           alt={product.image.alt}
           layout='fill'
         />
-      </div>
+      </motion.div>
       <h3 className='mt-4 text-sm text-gray-700'>
         <a href={product.href}>
           <span className='absolute inset-0' />
@@ -43,7 +72,7 @@ const ProductCard: FC<Props> = ({ className, product }) => {
       </h3>
       <p className='mt-1 text-sm text-gray-500'>{product.color}</p>
       <p className='mt-1 text-sm font-medium text-gray-900'>{product.price}</p>
-    </div>
+    </motion.div>
   )
 }
 

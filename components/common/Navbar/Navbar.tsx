@@ -1,10 +1,26 @@
 import { FC, useRef, useEffect, Fragment } from 'react'
-
 import Link from 'next/link'
-import { Popover, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
-const title = 'Snug selling baby carriers'
+import { Popover, Transition } from '@headlessui/react'
+
+import {
+  MenuIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  XIcon,
+} from '@heroicons/react/outline'
+
+import { Logo } from '@components/icons'
+
+const navigation = {
+  title: 'Design 2 MA1',
+  pages: [
+    { name: 'Decorations', href: '#' },
+    { name: 'Vases', href: '#' },
+    { name: 'Pillows', href: '#' },
+    { name: 'Blankets', href: '#' },
+  ],
+}
 
 const shortcuts = [
   {
@@ -33,39 +49,82 @@ const Navbar: FC = () => {
   const showRef = useRef<HTMLButtonElement>(null)
 
   return (
-    <Popover
-      className='fixed inset-x-0 z-50 bg-white bg-opacity-90 dark:bg-black dark:bg-opacity-80'
-      style={{
-        backdropFilter: 'saturate(180%) blur(5px)',
-      }}
-    >
+    <Popover className='fixed inset-x-0 z-50 bg-white backdrop-blur backdrop-filter bg-opacity-10'>
       {({ open }) => (
         <>
           <div
-            className='h-20 sm:h-30 focus:outline-none'
+            className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 focus:outline-none'
             ref={hideRef}
             tabIndex={-1}
           >
-            <div className='grid h-full grid-flow-row grid-rows-none gap-5 grid-cols-navbar'>
-              <div className='flex items-center justify-between h-full col-start-2 col-end-auto'>
-                <div className='flex items-center justify-start'>
+            <div>
+              <div className='flex items-center justify-between h-16'>
+                {/* Left nav */}
+                <div className='lg:flex-1 lg:flex lg:items-center'>
                   <Link href='/'>
-                    <a className='ml-2'>
-                      <span className='text-black dark:text-white'>
-                        {title}
+                    <a className='flex items-center gap-x-2'>
+                      <Logo className='w-6 h-6 text-black' />
+                      <span className='text-sm font-semibold text-black'>
+                        {navigation.title}
                       </span>
                     </a>
                   </Link>
                 </div>
-                <div className='flex items-center justify-start'>
-                  <div className='flex items-center gap-x-2'>
-                    <div className='relative'>
+
+                {/* Center nav */}
+                <div className='hidden lg:flex lg:space-x-8'>
+                  {navigation.pages.map((page) => (
+                    <a
+                      key={page.name}
+                      href={page.href}
+                      className='flex items-center text-sm font-semibold text-black'
+                    >
+                      {page.name}
+                    </a>
+                  ))}
+                </div>
+
+                {/* Right nav */}
+                <div className='flex justify-end flex-1'>
+                  <div className='flex items-center space-x-8'>
+                    <Link href='#'>
+                      <a className='hidden text-sm font-semibold text-black lg:block'>
+                        Sign in
+                      </a>
+                    </Link>
+
+                    <Link href='#'>
+                      <a className='hidden text-sm font-semibold text-black lg:block'>
+                        Create an account
+                      </a>
+                    </Link>
+
+                    {/* Cart */}
+                    <div className='flow-root'>
+                      <Link href='#'>
+                        <a className='flex items-center px-3 py-1.5 -m-2 bg-black rounded-full bg-opacity-5 hover:bg-opacity-10'>
+                          <ShoppingBagIcon
+                            className='flex-shrink-0 w-6 h-6 text-black'
+                            aria-hidden='true'
+                          />
+                          <span className='ml-2 text-sm font-semibold text-black'>
+                            0
+                          </span>
+                          <span className='sr-only'>
+                            items in cart, view bag
+                          </span>
+                        </a>
+                      </Link>
+                    </div>
+
+                    {/* Mobile menu */}
+                    <div className='flex items-center flex-1 lg:hidden'>
                       <Popover.Button
-                        className='flex items-center justify-center w-10 h-10 text-black transition bg-transparent border-none rounded-lg ease-default duration-400 dark:text-white hover:p-2 hover:shadow-small focus:outline-none focus:ring-transparent'
+                        className='px-2 py-1.5 -ml-2 text-black bg-black rounded-full bg-opacity-5 hover:bg-opacity-10'
                         ref={showRef}
                       >
                         <span className='sr-only'>Open menu</span>
-                        <MenuIcon className='w-6 h-6' />
+                        <MenuIcon className='w-6 h-6' aria-hidden='true' />
                       </Popover.Button>
                     </div>
                   </div>
@@ -78,7 +137,7 @@ const Navbar: FC = () => {
             <Popover.Panel
               focus
               static
-              className='absolute inset-x-0 top-0 transition origin-center transform'
+              className='absolute inset-x-0 top-0 transition origin-center transform '
             >
               <div className='relative min-h-full p-2 sm:flex sm:items-center sm:justify-center sm:content-center'>
                 <Transition.Child
@@ -90,7 +149,7 @@ const Navbar: FC = () => {
                   leaveFrom='opacity-100'
                   leaveTo='opacity-0'
                 >
-                  <Popover.Overlay className='fixed inset-0 min-h-screen transition-colors bg-white cursor-pointer dark:bg-black bg-opacity-90 dark:bg-opacity-80' />
+                  <Popover.Overlay className='fixed inset-0 min-h-screen transition-all bg-white cursor-pointer bg-opacity-90' />
                 </Transition.Child>
 
                 <Transition.Child
@@ -107,7 +166,7 @@ const Navbar: FC = () => {
                       <div className='flex items-center justify-between'>
                         <div className='flex items-center'>
                           <span className='text-black dark:text-white'>
-                            {title}
+                            {navigation.title}
                           </span>
                         </div>
                         <div className='flex items-center'>
@@ -168,3 +227,106 @@ const Navbar: FC = () => {
 }
 
 export default Navbar
+
+// {/* <header className='fixed z-10 w-full'>
+//           <nav aria-label='Top'>
+//             {/* Secondary navigation */}
+//             <div className='bg-white backdrop-blur backdrop-filter bg-opacity-10'>
+//               <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+//                 <div>
+//                   <div className='flex items-center justify-between h-16'>
+//                     {/* Logo (lg+) */}
+//                     <div className='hidden lg:flex-1 lg:flex lg:items-center'>
+//                       <Link href='/'>
+//                         <a className='flex items-center gap-x-2'>
+//                           <Logo className='w-6 h-6 text-black' />
+//                           <span className='text-sm font-semibold text-black'>
+//                             Design 2 MA1
+//                           </span>
+//                         </a>
+//                       </Link>
+//                     </div>
+
+//                     <div className='hidden h-full lg:flex'>
+//                       {/* Flyout menus */}
+//                       <Popover.Group className='inset-x-0 bottom-0 px-4'>
+//                         <div className='flex justify-center h-full space-x-8'>
+//                           {navigation.pages.map((page) => (
+//                             <a
+//                               key={page.name}
+//                               href={page.href}
+//                               className='flex items-center text-sm font-semibold text-black'
+//                             >
+//                               {page.name}
+//                             </a>
+//                           ))}
+//                         </div>
+//                       </Popover.Group>
+//                     </div>
+
+//                     {/* Mobile menu and search (lg-) */}
+//                     <div className='flex items-center flex-1 lg:hidden'>
+//                       <button
+//                         type='button'
+//                         className='p-2 -ml-2 text-black'
+//                         onClick={() => setMobileMenuOpen(true)}
+//                       >
+//                         <span className='sr-only'>Open menu</span>
+//                         <MenuIcon className='w-6 h-6' aria-hidden='true' />
+//                       </button>
+
+//                       {/* Search */}
+//                       <a href='#' className='p-2 ml-2 text-black'>
+//                         <span className='sr-only'>Search</span>
+//                         <SearchIcon className='w-6 h-6' aria-hidden='true' />
+//                       </a>
+//                     </div>
+
+//                     {/* Logo (lg-) */}
+//                     <a href='#' className='lg:hidden'>
+//                       <span className='sr-only'>Design 2 MA1</span>
+//                       <Logo className='w-auto h-8 text-black' />
+//                     </a>
+
+//                     <div className='flex items-center justify-end flex-1'>
+//                       <a
+//                         href='#'
+//                         className='hidden text-sm font-semibold text-black lg:block'
+//                       >
+//                         Sign in
+//                       </a>
+
+//                       <div className='flex items-center lg:ml-8'>
+//                         <a
+//                           href='#'
+//                           className='hidden text-sm font-semibold text-black lg:block'
+//                         >
+//                           Create an account
+//                         </a>
+
+//                         {/* Cart */}
+//                         <div className='flow-root ml-4 lg:ml-8'>
+//                           <a
+//                             href='#'
+//                             className='flex items-center p-2 -m-2 group'
+//                           >
+//                             <ShoppingBagIcon
+//                               className='flex-shrink-0 w-6 h-6 text-black'
+//                               aria-hidden='true'
+//                             />
+//                             <span className='ml-2 text-sm font-semibold text-black'>
+//                               0
+//                             </span>
+//                             <span className='sr-only'>
+//                               items in cart, view bag
+//                             </span>
+//                           </a>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </nav>
+//         </header> */}

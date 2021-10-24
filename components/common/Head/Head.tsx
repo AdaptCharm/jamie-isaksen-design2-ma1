@@ -9,23 +9,22 @@ const Head: FC = () => {
       <DefaultSeo {...config} />
       <NextHead>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta name='robots' content='index, follow' />
-        <link id='favicon' rel='icon' href='/favicon/dark/favicon.ico' />
+        <link id='favicon' rel='icon' href='/favicon/favicon.ico' />
         <link
           id='icon'
           rel='icon'
-          href='/favicon/dark/icon.svg'
+          href='/favicon/icon.svg'
           type='image/svg+xml'
         />
         <link
           id='apple-touch'
           rel='apple-touch-icon'
-          href='/favicon/dark/apple-touch-icon.png'
+          href='/favicon/apple-touch-icon.png'
         />
         <link
           id='manifest'
           rel='manifest'
-          href='/favicon/dark/manifest.webmanifest'
+          href='/favicon/manifest.webmanifest'
         />
       </NextHead>
     </>

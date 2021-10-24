@@ -1,38 +1,16 @@
 import { Layout } from '@components/common'
 import Link from 'next/link'
 import Image from 'next/image'
-import cn from 'classnames'
 import { motion } from 'framer-motion'
 import { FadeInWhenVisible } from '@components/motion'
 
 import {
-  MenuIcon,
-  QuestionMarkCircleIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  XIcon,
   ShieldCheckIcon,
   TruckIcon,
   SparklesIcon,
 } from '@heroicons/react/outline'
 
-import { Logo } from '@components/icons'
-
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-
-import { Element, Container, Text, Grid, Badge } from '@components/ui'
-
 import { ProductCard } from '@components/product'
-
-const navigation = {
-  pages: [
-    { name: 'Decorations', href: '#' },
-    { name: 'Vases', href: '#' },
-    { name: 'Pillows', href: '#' },
-    { name: 'Blankets', href: '#' },
-  ],
-}
 
 const decorations = [
   {
@@ -40,7 +18,7 @@ const decorations = [
     name: 'Bali stone decorations',
     color: 'Natural',
     price: '$25',
-    href: '#',
+    href: '/',
     image: {
       src: '/decorations/bali-stone-decorations.png',
       alt: 'Bali stone decorations.',
@@ -51,7 +29,7 @@ const decorations = [
     name: 'Buddha status with incense and candle',
     color: 'Natural',
     price: '$75',
-    href: '#',
+    href: '/',
     image: {
       src: '/decorations/buddha-statue-with-incense-and-candle.jpg',
       alt: 'Buddha status with incense and candle.',
@@ -62,7 +40,7 @@ const decorations = [
     name: 'Handmade macrame sign',
     color: 'Natural',
     price: '$25',
-    href: '#',
+    href: '/',
     image: {
       src: '/decorations/handmade-macrame-sign.jpg',
       alt: 'Handmade macrame sign.',
@@ -73,7 +51,7 @@ const decorations = [
     name: 'Live laugh surf sign',
     color: 'Natural',
     price: '$50',
-    href: '#',
+    href: '/',
     image: {
       src: '/decorations/live-laugh-surf-sign.jpg',
       alt: 'Live laugh surf sign.',
@@ -87,7 +65,7 @@ const trendingProducts = [
     name: 'Green foliage with wooden vases',
     color: 'Natural',
     price: '$75',
-    href: '#',
+    href: '/',
     image: {
       src: '/product/trending/green-foliage-with-wooden-vases.jpg',
       alt: 'Green foliage with wooden vases.',
@@ -98,7 +76,7 @@ const trendingProducts = [
     name: 'Purple foliage with ceramic vase',
     color: 'Natural',
     price: '$100',
-    href: '#',
+    href: '/',
     image: {
       src: '/product/trending/purple-foliage-with-ceramic-vase.png',
       alt: 'Purple foliage with ceramic vase.',
@@ -109,7 +87,7 @@ const trendingProducts = [
     name: 'Clear glass vase with a wooden cup of tea',
     color: 'Natural',
     price: '$50',
-    href: '#',
+    href: '/',
     image: {
       src: '/product/trending/clear-glass-vase-with-a-wooden-cup-of-tea.png',
       alt: 'Clear glass vase with a wooden cup of tea.',
@@ -120,7 +98,7 @@ const trendingProducts = [
     name: 'Glass vase with green leafs',
     color: 'Natural',
     price: '$25',
-    href: '#',
+    href: '/',
     image: {
       src: '/product/trending/glass-vase-with-green-leafs.png',
       alt: 'Glass vase with green leafs.',
@@ -223,7 +201,7 @@ const Home = () => {
       {/* Decorations section */}
       <FadeInWhenVisible>
         <section aria-labelledby='trending-heading'>
-          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
             <motion.div
               animate={{ opacity: 1 }}
               initial={{ opacity: 0 }}
@@ -268,7 +246,7 @@ const Home = () => {
       {/* Vases section */}
       <FadeInWhenVisible>
         <section aria-labelledby='trending-heading'>
-          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 sm:py-32 lg:pt-32 lg:px-8'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
             <motion.div
               animate={{ opacity: 1 }}
               initial={{ opacity: 0 }}
@@ -312,7 +290,7 @@ const Home = () => {
       {/* Featured section */}
       <FadeInWhenVisible>
         <section aria-labelledby='comfort-heading' className=''>
-          <div className='relative bg-gradient-to-r from-teal-200 to-cyan-400'>
+          <div className='relative bg-gradient-to-r from-cyan-400 to-teal-200'>
             <div className='relative px-6 py-32 sm:py-40 sm:px-12 lg:px-16'>
               <div className='relative flex flex-col items-center max-w-3xl mx-auto text-center'>
                 <h2
@@ -331,7 +309,7 @@ const Home = () => {
                   <motion.a
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className='block w-full px-8 py-3 mt-8 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 sm:w-auto'
+                    className='inline-flex px-8 py-3 mt-8 text-base font-medium text-black bg-white border border-transparent rounded-md bg-opacity-30 hover:bg-opacity-50 sm:w-auto'
                   >
                     Read more
                   </motion.a>
@@ -392,7 +370,7 @@ const Home = () => {
       {/* Newsletter section */}
       <FadeInWhenVisible>
         <div className='bg-white'>
-          <div className='px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8'>
+          <div className='px-4 py-24 mx-auto max-w-7xl sm:px-6 lg:px-8'>
             <div className='relative px-6 py-10 overflow-hidden rounded-3xl sm:py-16 sm:px-12 lg:p-20'>
               <div className='flex-shrink-0'>
                 <Image
@@ -437,9 +415,11 @@ const Home = () => {
                   </form>
                   <p className='mt-3 text-sm text-black'>
                     We care about the protection of your data. Read our{' '}
-                    <a href='#' className='font-medium text-black underline'>
-                      Privacy Policy.
-                    </a>
+                    <Link href='/' scroll={false}>
+                      <a className='font-medium text-black underline'>
+                        Privacy Policy.
+                      </a>
+                    </Link>
                   </p>
                 </div>
               </div>

@@ -1,48 +1,21 @@
-import { FC, useRef, useEffect, Fragment } from 'react'
+import { FC, useRef } from 'react'
 import Link from 'next/link'
 
-import { Popover, Transition } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 
-import {
-  MenuIcon,
-  SearchIcon,
-  ShoppingBagIcon,
-  XIcon,
-} from '@heroicons/react/outline'
+import { MenuIcon, ShoppingBagIcon } from '@heroicons/react/outline'
 
 import { Logo } from '@components/icons'
 
 const navigation = {
   title: 'Design 2 MA1',
   pages: [
-    { name: 'Decorations', href: '#' },
-    { name: 'Vases', href: '#' },
-    { name: 'Pillows', href: '#' },
-    { name: 'Blankets', href: '#' },
+    { name: 'Decorations', href: '/' },
+    { name: 'Vases', href: '/' },
+    { name: 'Pillows', href: '/' },
+    { name: 'Blankets', href: '/' },
   ],
 }
-
-const shortcuts = [
-  {
-    name: 'Command center',
-    key: ['ctrl', 'k'],
-  },
-  {
-    name: 'Switch theme',
-    key: ['ctrl', 't'],
-  },
-  {
-    name: 'Shopping cart',
-    key: ['ctrl', 'c'],
-  },
-]
-
-const pages = [
-  {
-    name: 'Products',
-    href: '/products',
-  },
-]
 
 const Navbar: FC = () => {
   const hideRef = useRef<HTMLDivElement>(null)
@@ -74,26 +47,24 @@ const Navbar: FC = () => {
                 {/* Center nav */}
                 <div className='hidden lg:flex lg:space-x-8'>
                   {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className='flex items-center text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40'
-                    >
-                      {page.name}
-                    </a>
+                    <Link href={page.href} key={page.name}>
+                      <a className='flex items-center text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40'>
+                        {page.name}
+                      </a>
+                    </Link>
                   ))}
                 </div>
 
                 {/* Right nav */}
                 <div className='flex justify-end flex-1'>
                   <div className='flex items-center space-x-8'>
-                    <Link href='#'>
+                    <Link href='/'>
                       <a className='hidden text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40 lg:block'>
                         Sign in
                       </a>
                     </Link>
 
-                    <Link href='#'>
+                    <Link href='/'>
                       <a className='hidden text-sm font-semibold text-black transition-opacity duration-200 ease-in-out hover:opacity-40 lg:block'>
                         Create an account
                       </a>
@@ -101,7 +72,7 @@ const Navbar: FC = () => {
 
                     {/* Cart */}
                     <div className='flow-root'>
-                      <Link href='#'>
+                      <Link href='/'>
                         <a className='flex items-center px-3 py-1.5 -m-2 bg-black rounded-full bg-opacity-5 hover:bg-opacity-10'>
                           <ShoppingBagIcon
                             className='flex-shrink-0 w-6 h-6 text-black'

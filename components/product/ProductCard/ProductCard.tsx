@@ -1,10 +1,7 @@
 import { FC } from 'react'
-import cn from 'classnames'
+import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-
-import { Text } from '@components/ui'
-import { X } from '@components/icons'
 
 interface Props {
   className?: string
@@ -65,10 +62,12 @@ const ProductCard: FC<Props> = ({ className, product }) => {
         />
       </motion.div>
       <h3 className='mt-4 text-sm text-gray-700'>
-        <a href={product.href}>
-          <span className='absolute inset-0' />
-          {product.name}
-        </a>
+        <Link href={product.href} scroll={false}>
+          <a>
+            <span className='absolute inset-0' />
+            {product.name}
+          </a>
+        </Link>
       </h3>
       <p className='mt-1 text-sm text-gray-500'>{product.color}</p>
       <p className='mt-1 text-sm font-medium text-gray-900'>{product.price}</p>
